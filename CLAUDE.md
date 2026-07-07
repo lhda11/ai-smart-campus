@@ -15,9 +15,11 @@ mvn clean compile
 # MinIO          — docker，端口 9001
 
 # 设置环境变量
-export AI_API_KEY=你的DeepSeek_API_Key
+export AI_API_KEY=你的AI_API_Key
 export AI_BASE_URL=https://api.deepseek.com
-export SILICONFLOW_API_KEY=你的硅基流动_API_Key
+export EMBEDDING_API_KEY=你的Embedding_API_Key
+export EMBEDDING_BASE_URL=https://api.siliconflow.cn
+export EMBEDDING_MODEL=Qwen/Qwen3-Embedding-8B
 
 # 启动
 mvn spring-boot:run -pl campus-core
@@ -71,8 +73,8 @@ ai-smart-campus/
 
 ## AI Models
 
-- **Chat**: DeepSeek `deepseek-v4-flash` (OpenAI 兼容)
-- **Embedding**: 硅基流动 `Qwen/Qwen3-Embedding-8B` (4096 维)
+- **Chat**: OpenAI 兼容 Chat API (可配置为 DeepSeek 或任意兼容服务)
+- **Embedding**: OpenAI 兼容 Embedding API (可配置为硅基流动或任意兼容服务)
 - **Vector Store**: Redis Stack (RediSearch HNSW)
 
 ## Tech Stack
@@ -86,8 +88,8 @@ ai-smart-campus/
 | Redis Stack | 7.2+ |
 | RabbitMQ | 3.12+ |
 | MinIO | latest |
-| DeepSeek API | — |
-| 硅基流动 API | — |
+| OpenAI 兼容 Chat API | — |
+| OpenAI 兼容 Embedding API | — |
 
 ## Tests
 
@@ -104,7 +106,9 @@ mvn test -pl campus-core
 |---|---|---|
 | AI_API_KEY | Chat 需要 | sk-demo-key |
 | AI_BASE_URL | Chat 需要 | https://api.deepseek.com |
-| SILICONFLOW_API_KEY | Embedding 需要 | — |
+| EMBEDDING_API_KEY | Embedding 需要 | — |
+| EMBEDDING_BASE_URL | Embedding 需要 | https://api.siliconflow.cn |
+| EMBEDDING_MODEL | Embedding 需要 | Qwen/Qwen3-Embedding-8B |
 | MYSQL_USER / MYSQL_PASSWORD | ✅ | root / 123456 |
 | REDIS_HOST / REDIS_PORT | — | localhost / 6380 |
 | RABBITMQ_HOST / RABBITMQ_PORT | — | localhost / 5672 |

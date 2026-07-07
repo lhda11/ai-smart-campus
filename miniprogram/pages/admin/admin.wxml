@@ -24,7 +24,7 @@
     </view>
 
     <view class="admin-notice">
-      注意：此操作需要后端 Embedding API 可用，请确保硅基流动 API Key 已配置。
+      注意：此操作需要后端 Embedding API 可用，请确保 Embedding API Key 已配置。
     </view>
   </view>
 

@@ -10,29 +10,29 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 双 Provider AI 配置：
- * - Chat: 默认 OpenAI auto-config (DeepSeek)
- * - Embedding: 硅基流动 SiliconFlow (独立 OpenAiApi)
+ * - Chat: 默认 OpenAI auto-config
+ * - Embedding: 独立 Embedding Provider (独立 OpenAiApi)
  */
 @Configuration
 public class AIConfig {
 
-    @Value("${siliconflow.api-key}")
-    private String siliconflowApiKey;
+    @Value("${embedding.api-key}")
+    private String embeddingApiKey;
 
-    @Value("${siliconflow.base-url}")
-    private String siliconflowBaseUrl;
+    @Value("${embedding.base-url}")
+    private String embeddingBaseUrl;
 
-    @Value("${siliconflow.embedding-model}")
-    private String siliconflowEmbeddingModel;
+    @Value("${embedding.model}")
+    private String embeddingModel;
 
     @Bean
     @ConditionalOnMissingBean
     public EmbeddingModel embeddingModel() {
-        OpenAiApi siliconflowApi = new OpenAiApi(siliconflowBaseUrl, siliconflowApiKey);
+        OpenAiApi embeddingApi = new OpenAiApi(embeddingBaseUrl, embeddingApiKey);
         var options = org.springframework.ai.openai.OpenAiEmbeddingOptions.builder()
-                .withModel(siliconflowEmbeddingModel)
+                .withModel(embeddingModel)
                 .build();
-        return new OpenAiEmbeddingModel(siliconflowApi,
+        return new OpenAiEmbeddingModel(embeddingApi,
                 org.springframework.ai.document.MetadataMode.EMBED, options);
     }
 }

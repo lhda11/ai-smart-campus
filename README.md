@@ -30,7 +30,7 @@ AI 智慧园区是一个面向校园/园区的综合服务平台，将 AI 大模
 - 首次登录引导
 
 ### 🔍 语义搜索
-- **Embedding 向量检索**（基于硅基流动 Qwen3-Embedding）
+- **Embedding 向量检索**（基于通用 Embedding 模型）
 - **Redis Stack 向量存储**（HNSW 索引）
 - **MySQL 关键词全文检索**（双路召回）
 
@@ -66,8 +66,8 @@ ai-smart-campus/
 | Redis Stack | 7.2+ | 缓存 + 向量存储 |
 | RabbitMQ | 3.12+ | 异步消息 |
 | MinIO | latest | 对象存储 |
-| DeepSeek API | — | AI 对话模型 |
-| 硅基流动 API | — | Embedding 模型 |
+| AI 对话模型 | API | — | AI 对话模型 |
+| Embedding 模型 | API | — | Embedding 模型 |
 
 ## 🚀 快速开始
 
@@ -84,9 +84,11 @@ ai-smart-campus/
 
 ```bash
 # 1. 设置环境变量（将 YOUR_KEY 替换为真实的 API Key）
-export AI_API_KEY=YOUR_DEEPSEEK_API_KEY
+export AI_API_KEY=YOUR_AI_API_KEY
 export AI_BASE_URL=https://api.deepseek.com
-export SILICONFLOW_API_KEY=YOUR_SILICONFLOW_API_KEY
+export EMBEDDING_API_KEY=YOUR_EMBEDDING_API_KEY
+export EMBEDDING_BASE_URL=https://api.siliconflow.cn
+export EMBEDDING_MODEL=Qwen/Qwen3-Embedding-8B
 
 # 2. 编译
 mvn clean compile
@@ -99,9 +101,11 @@ mvn spring-boot:run -pl campus-core
 
 | 变量 | 必填 | 说明 |
 |------|------|------|
-| `AI_API_KEY` | ✅ | DeepSeek / AI 模型 API Key |
-| `AI_BASE_URL` | — | AI 接口地址（默认 DeepSeek） |
-| `SILICONFLOW_API_KEY` | Embedding 需要 | 硅基流动 API Key |
+| `AI_API_KEY` | ✅ | AI 模型 API Key |
+| `AI_BASE_URL` | — | AI 接口地址 |
+| `EMBEDDING_API_KEY` | Embedding 需要 | Embedding 模型 API Key |
+| `EMBEDDING_BASE_URL` | — | Embedding 接口地址 |
+| `EMBEDDING_MODEL` | — | Embedding 模型名称 |
 | `MYSQL_USER` | ✅ | 数据库用户名 |
 | `MYSQL_PASSWORD` | ✅ | 数据库密码 |
 | `REDIS_HOST` | — | Redis 地址（默认 localhost） |
