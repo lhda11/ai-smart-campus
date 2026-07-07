@@ -1,0 +1,74 @@
+.announcement-item {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid var(--border);
+}
+
+.announcement-item:active {
+  background: var(--bg-page);
+}
+
+.ann-item-left {
+  padding: 24rpx 0 24rpx 24rpx;
+  display: flex;
+}
+
+.color-bar {
+  width: 6rpx;
+  border-radius: 3rpx;
+  flex-shrink: 0;
+}
+
+.color-bar-notice { background: var(--primary); }
+.color-bar-activity { background: #FF9500; }
+.color-bar-policy { background: #34C759; }
+
+.ann-item-right {
+  flex: 1;
+  padding: 24rpx 32rpx 24rpx 20rpx;
+  overflow: hidden;
+}
+
+.ann-item-header {
+  margin-bottom: 8rpx;
+}
+
+.ann-item-title {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.ann-item-badge {
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  margin-left: 16rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ann-item-summary,
+.ann-item-content {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-bottom: 8rpx;
+  line-height: 1.5;
+}
+
+.ann-item-time {
+  font-size: 22rpx;
+  color: var(--text-hint);
+}
+
+/* Skeleton */
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24rpx 32rpx;
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 1rpx solid var(--border);
+  box-shadow: none;
+}

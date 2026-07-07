@@ -1,0 +1,23 @@
+<view class="yuanbao-wrap yuanbao-{{size}} variant-{{variant}} {{animated ? 'yuanbao-float' : ''}} {{isBouncing ? 'yuanbao-bounce' : ''}}"
+      bindtap="onTap">
+  <view wx:if="{{variant === 'cat'}}" class="cat-ear cat-ear-left"></view>
+  <view wx:if="{{variant === 'cat'}}" class="cat-ear cat-ear-right"></view>
+  <view class="yuanbao-body">
+    <view wx:if="{{variant === 'robot'}}" class="robot-antenna"></view>
+    <view class="yuanbao-face face-{{innerExpression}}">
+      <view class="eye eye-left">
+        <view class="pupil"></view>
+      </view>
+      <view class="eye eye-right">
+        <view class="pupil"></view>
+      </view>
+      <view class="mouth"></view>
+      <view wx:if="{{variant === 'cat'}}" class="cat-nose"></view>
+      <view wx:if="{{variant === 'cat'}}" class="cat-whiskers cat-whiskers-left"></view>
+      <view wx:if="{{variant === 'cat'}}" class="cat-whiskers cat-whiskers-right"></view>
+      <view class="cheek cheek-left"></view>
+      <view class="cheek cheek-right"></view>
+    </view>
+    <view class="yuanbao-shadow"></view>
+  </view>
+</view>

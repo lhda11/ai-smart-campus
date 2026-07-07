@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "yuanbao-avatar": "/components/yuanbao-avatar/yuanbao-avatar"
+  }
+}

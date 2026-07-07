@@ -1,0 +1,38 @@
+# Build
+target/
+*.jar
+*.class
+*.war
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Env (keep template, exclude local overrides)
+.env
+.env.local
+.env.*.local
+application-local.yml
+
+# Temp
+/tmp/
+*.tmp
+*.bak
+
+# Node (miniprogram)
+node_modules/
+dist/
+
+# Maven wrapper (keep if you have it, otherwise safe to ignore)
+# .mvn/wrapper/maven-wrapper.jar

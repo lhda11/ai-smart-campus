@@ -1,0 +1,80 @@
+<wxs module="fmt">
+  function fmtTime(iso) {
+    if (!iso) return '';
+    var d = getDate(iso.replace('T',' ').substring(0,19));
+    var now = getDate();
+    var pad = function(n){return n<10?'0'+n:''+n;};
+    var time = pad(d.getHours())+':'+pad(d.getMinutes());
+    var isToday = d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate();
+    if (isToday) return time;
+    var y = getDate(now.getTime()-86400000);
+    var isYest = d.getFullYear()===y.getFullYear() && d.getMonth()===y.getMonth() && d.getDate()===y.getDate();
+    if (isYest) return '昨天 ' + time;
+    var ds = pad(d.getMonth()+1)+'-'+pad(d.getDate());
+    if (d.getFullYear()===now.getFullYear()) return ds+' '+time;
+    return d.getFullYear()+'-'+ds+' '+time;
+  }
+  module.exports = { fmtTime: fmtTime };
+</wxs>
+
+<view class="page-container">
+  <!-- 顶部操作栏 -->
+  <view wx:if="{{!isEmpty}}" class="chat-header-actions">
+    <view class="chat-header-left">
+      <text class="chat-header-count">共 {{conversations.length}} 个对话</text>
+    </view>
+    <view class="chat-header-right">
+      <view class="clear-all-btn" bindtap="onClearAll">
+        <text>一键清空</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 对话列表 -->
+  <view wx:if="{{!isEmpty}}">
+    <view
+      wx:for="{{conversations}}"
+      wx:key="id"
+      class="conv-item-wrapper"
+    >
+      <view
+        class="conv-item {{item._swiped ? 'conv-swiped' : ''}}"
+        data-id="{{item.id}}"
+        bindtouchstart="onTouchStart"
+        bindtouchmove="onTouchMove"
+        bindtouchend="onTouchEnd"
+        bindtap="openChat"
+      >
+        <view class="conv-avatar">
+          <yuanbao-avatar size="sm" expression="normal" animated="{{false}}" />
+        </view>
+        <view class="conv-content">
+          <view class="conv-header flex-between">
+            <text class="conv-title text-ellipsis">{{item.title || '新的对话'}}</text>
+            <text class="conv-time">{{fmt.fmtTime(item.updatedAt || item.createdAt)}}</text>
+          </view>
+          <text class="conv-preview text-ellipsis">{{item.title ? '点击继续对话' : '新的对话'}}</text>
+        </view>
+        <view class="conv-arrow">›</view>
+      </view>
+      <view class="conv-delete-btn" data-id="{{item.id}}" catchtap="deleteChat">
+        <text>删除</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <empty-state
+    wx:if="{{isEmpty && !loading}}"
+    useAvatar
+    text="还没有对话记录"
+    subtitle="点击下方按钮开始和园宝对话吧"
+    buttonText="开始新对话"
+    bindaction="newChat"
+  />
+
+  <!-- 新建对话 FAB -->
+  <view class="fab" bindtap="newChat">
+    <text>＋</text>
+  </view>
+</view>

@@ -1,0 +1,88 @@
+<view class="chat-container">
+  <!-- 顶部操作栏 -->
+  <view class="detail-top-bar">
+    <view class="detail-top-left">
+      <text class="detail-top-title">对话</text>
+    </view>
+    <view class="detail-top-actions">
+      <view class="detail-action-btn" bindtap="onCopyLatest" wx:if="{{messages.length > 0}}">
+        <text>复制</text>
+      </view>
+      <view class="detail-action-btn detail-action-danger" bindtap="onDeleteConversation" wx:if="{{convId}}">
+        <text>删除</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 消息区域 -->
+  <scroll-view
+    class="msg-scroll"
+    scroll-y
+    scroll-into-view="{{scrollToView}}"
+    scroll-with-animation
+    enhanced
+    show-scrollbar="{{false}}"
+    bindscroll="onScroll"
+  >
+    <!-- 快捷问题（新对话时显示） -->
+    <view wx:if="{{showQuickQuestions && messages.length === 0}}" class="quick-questions">
+      <view class="welcome-text">
+        <view class="welcome-avatar-wrap">
+          <yuanbao-avatar size="lg" expression="happy" animated />
+        </view>
+        <text class="welcome-title">你好，我是园宝！</text>
+        <text class="welcome-desc">长春师范大学AI校园助手，试试问我这些问题：</text>
+      </view>
+      <view class="quick-list">
+        <view
+          wx:for="{{['图书馆开放时间？','校园卡丢了怎么补办？','怎么打印成绩单？','学校有哪些院系？','宿舍怎么报修？','校园网怎么办理？']}}"
+          wx:key="index"
+          class="quick-item press-scale"
+          data-question="{{item}}"
+          bindtap="tapQuickQuestion"
+        >
+          <text class="quick-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 消息列表 -->
+    <chat-bubble
+      wx:for="{{messages}}"
+      wx:key="id"
+      id="msg-{{index}}"
+      role="{{item.role}}"
+      content="{{item.content}}"
+      isStreaming="{{item._isStreaming}}"
+    />
+
+    <!-- 底部占位 -->
+    <view style="height: 180rpx;"></view>
+  </scroll-view>
+
+  <!-- 滚动到底部按钮 -->
+  <view wx:if="{{showScrollToBottom}}" class="scroll-to-bottom" bindtap="scrollToBottomForce">
+    <text>↓</text>
+  </view>
+
+  <!-- 底部输入区 -->
+  <view class="input-area safe-bottom" style="padding-bottom: calc(12rpx + {{safeBottom}}px);">
+    <input
+      class="chat-input"
+      placeholder="{{isGenerating ? '园宝正在回复中...' : '输入你的问题...'}}"
+      value="{{inputValue}}"
+      disabled="{{isGenerating}}"
+      bindinput="onInput"
+      bindconfirm="onConfirm"
+      confirm-type="send"
+    />
+    <button
+      class="send-btn {{inputValue && !isGenerating ? 'send-active' : ''}}"
+      disabled="{{!inputValue || isGenerating}}"
+      bindtap="onSend"
+    >
+      <text wx:if="{{inputValue && !isGenerating}}" class="send-icon">▲</text>
+      <text wx:else class="send-icon-disabled">▲</text>
+    </button>
+  </view>
+</view>

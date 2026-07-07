@@ -1,0 +1,31 @@
+<wxs module="fmt">
+  function parseTags(tagsStr) {
+    if (!tagsStr) return [];
+    if (tagsStr.charAt(0) === '[') {
+      var arr = JSON.parse(tagsStr);
+      if (arr && arr.length >= 0) return arr;
+    }
+    return tagsStr.split(',').map(function(t) { return t.trim(); }).filter(function(t) { return t; });
+  }
+  module.exports = { parseTags: parseTags };
+</wxs>
+
+<view class="club-card card press-scale" bindtap="onTap">
+  <view class="club-top">
+    <view class="club-logo-wrap">
+      <image class="club-logo" src="{{club.logoUrl || '/images/club-default.png'}}" mode="aspectFill" />
+    </view>
+    <view class="club-info">
+      <text class="club-name text-ellipsis">{{club.name}}</text>
+      <text class="club-desc text-ellipsis-2">{{club.description}}</text>
+    </view>
+    <text class="club-arrow">›</text>
+  </view>
+  <view class="club-tags" wx:if="{{club.tags}}">
+    <text wx:for="{{fmt.parseTags(club.tags)}}" wx:key="index" class="club-tag">{{item}}</text>
+  </view>
+  <view class="club-bottom flex-between">
+    <text class="club-members">{{club.memberCount || 0}} 名成员</text>
+    <text wx:if="{{showRecruitmentBadge}}" class="club-recruit-badge pulse-text">● 纳新中</text>
+  </view>
+</view>

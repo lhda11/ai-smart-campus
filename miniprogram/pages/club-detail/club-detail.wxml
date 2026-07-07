@@ -1,0 +1,116 @@
+<wxs module="fmt">
+  function parseTags(ts) {
+    if (!ts) return [];
+    if (ts.charAt(0) === '[') {
+      var arr = JSON.parse(ts);
+      if (arr && arr.length >= 0) return arr;
+    }
+    return ts.split(',').map(function(t){return t.trim()}).filter(function(t){return t;});
+  }
+  function statusLabel(s) {
+    if (s === 0) return '已下架';
+    if (s === 1) return '进行中';
+    if (s === 2) return '已满员';
+    if (s === 3) return '已结束';
+    return '未知';
+  }
+  function statusColor(s) {
+    if (s === 0) return '#777777';
+    if (s === 1) return '#34C759';
+    if (s === 2) return '#FF9500';
+    if (s === 3) return '#777777';
+    return '#777777';
+  }
+  function fmtTime(iso) {
+    if (!iso) return '';
+    var d = getDate(iso.replace('T',' ').substring(0,19));
+    var p = function(n){return n<10?'0'+n:''+n;};
+    return p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+  }
+  function quotaPercent(enrolled, quota) {
+    if (!quota || quota === 0) return 0;
+    var pct = Math.round((enrolled || 0) / quota * 100);
+    return pct > 100 ? 100 : pct;
+  }
+  module.exports = {
+    parseTags: parseTags,
+    statusLabel: statusLabel,
+    statusColor: statusColor,
+    fmtTime: fmtTime,
+    quotaPercent: quotaPercent
+  };
+</wxs>
+
+<view class="page-container">
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-center">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <block wx:elif="{{club}}">
+    <!-- 社团头部 -->
+    <view class="club-header card">
+      <view class="club-header-top">
+        <view class="club-logo-wrap">
+          <image class="club-header-logo" src="{{club.logoUrl || '/images/club-default.png'}}" mode="aspectFill" />
+        </view>
+        <view class="club-header-info">
+          <text class="club-header-name">{{club.name}}</text>
+          <text class="club-header-members">{{club.memberCount || 0}} 名成员</text>
+        </view>
+      </view>
+      <view class="club-tags" wx:if="{{club.tags}}">
+        <text wx:for="{{fmt.parseTags(club.tags)}}" wx:key="index" class="club-tag">{{item}}</text>
+      </view>
+      <view class="club-desc">
+        <text>{{club.description}}</text>
+      </view>
+    </view>
+
+    <!-- 纳新活动 -->
+    <view class="section-title">纳新活动</view>
+    <view wx:if="{{recruitments.length > 0}}">
+      <view wx:for="{{recruitments}}" wx:key="id" class="recruit-card card">
+        <view class="recruit-header flex-between">
+          <text class="recruit-title">{{item.title}}</text>
+          <text class="recruit-status status-pill" style="background:{{fmt.statusColor(item.status)}}15;color:{{fmt.statusColor(item.status)}};">{{fmt.statusLabel(item.status)}}</text>
+        </view>
+        <text class="recruit-req" wx:if="{{item.requirement}}">要求：{{item.requirement}}</text>
+
+        <!-- 名额进度条 -->
+        <view class="recruit-quota-area">
+          <view class="quota-header flex-between">
+            <text class="quota-label">报名进度</text>
+            <text class="quota-num">{{item.enrolledCount || 0}} / {{item.quota || 0}}</text>
+          </view>
+          <view class="quota-bar">
+            <view class="quota-fill" style="width:{{fmt.quotaPercent(item.enrolledCount, item.quota)}}%;"></view>
+          </view>
+        </view>
+
+        <view class="recruit-meta flex-between">
+          <text class="recruit-time">截止：{{fmt.fmtTime(item.endTime)}}</text>
+          <button
+            wx:if="{{item.status === 1 && (item.enrolledCount || 0) < (item.quota || 999)}}"
+            class="btn-apply press-scale"
+            data-recruitment-id="{{item.id}}"
+            data-quota="{{item.quota}}"
+            data-enrolled="{{item.enrolledCount || 0}}"
+            bindtap="openApply"
+          >立即报名</button>
+          <button wx:else class="btn-apply btn-disabled" disabled>已结束</button>
+        </view>
+      </view>
+    </view>
+    <empty-state wx:else icon="◈" text="暂无纳新活动" subtitle="敬请期待" />
+  </block>
+</view>
+
+<!-- 报名弹窗 -->
+<apply-form-modal
+  visible="{{applyModalVisible}}"
+  recruitment-id="{{applyRecruitmentId}}"
+  club-name="{{applyClubName}}"
+  bindclose="onApplyClose"
+  bindsucceed="onApplySucceed"
+/>

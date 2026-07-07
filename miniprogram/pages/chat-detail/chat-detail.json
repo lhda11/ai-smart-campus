@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "园宝 · AI助手",
+  "usingComponents": {
+    "chat-bubble": "/components/chat-bubble/chat-bubble",
+    "yuanbao-avatar": "/components/yuanbao-avatar/yuanbao-avatar"
+  }
+}

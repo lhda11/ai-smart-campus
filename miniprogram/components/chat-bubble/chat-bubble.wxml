@@ -1,0 +1,59 @@
+<view class="msg-wrapper {{role === 'user' ? 'msg-user' : 'msg-assistant'}} fade-in-up">
+  <!-- 系统消息 -->
+  <view wx:if="{{role === 'system'}}" class="msg-system">
+    <text>{{content}}</text>
+  </view>
+
+  <!-- 用户/助手消息 -->
+  <block wx:else>
+    <view wx:if="{{role === 'assistant'}}" class="bubble-avatar">
+      <yuanbao-avatar size="sm" expression="{{isStreaming ? 'surprised' : 'normal'}}" animated="{{isStreaming}}" />
+    </view>
+    <view class="msg-content {{role}}-content">
+      <view class="msg-bubble {{role === 'user' ? 'bubble-user' : 'bubble-assistant'}}">
+        <!-- 遍历 Markdown 渲染节点 -->
+        <block wx:for="{{nodes}}" wx:key="index">
+          <!-- 段落 -->
+          <view wx:if="{{item.type === 'paragraph'}}" class="md-paragraph">
+            <block wx:for="{{item.content}}" wx:key="idx" wx:for-item="seg">
+              <text wx:if="{{seg.type === 'text'}}">{{seg.content}}</text>
+              <text wx:elif="{{seg.type === 'bold'}}" class="md-bold">{{seg.content}}</text>
+              <text wx:elif="{{seg.type === 'italic'}}" class="md-italic">{{seg.content}}</text>
+              <text wx:elif="{{seg.type === 'code'}}" class="md-inline-code">{{seg.content}}</text>
+            </block>
+          </view>
+          <!-- 标题 -->
+          <view wx:elif="{{item.type === 'heading'}}" class="md-heading">{{item.content}}</view>
+          <!-- 有序列表 -->
+          <view wx:elif="{{item.type === 'list-item'}}" class="md-list-item">
+            <block wx:for="{{item.content}}" wx:key="idx" wx:for-item="seg">
+              <text wx:if="{{seg.type === 'text'}}">{{seg.content}}</text>
+              <text wx:elif="{{seg.type === 'bold'}}" class="md-bold">{{seg.content}}</text>
+              <text wx:elif="{{seg.type === 'italic'}}" class="md-italic">{{seg.content}}</text>
+              <text wx:elif="{{seg.type === 'code'}}" class="md-inline-code">{{seg.content}}</text>
+            </block>
+          </view>
+          <!-- 代码块 -->
+          <view wx:elif="{{item.type === 'code-block'}}" class="md-code-block">
+            <text>{{item.content}}</text>
+          </view>
+          <!-- 纯文本 -->
+          <text wx:elif="{{item.type === 'text'}}">{{item.content}}</text>
+          <!-- 换行 -->
+          <view wx:elif="{{item.type === 'br'}}" class="md-br"></view>
+        </block>
+
+        <!-- 流式输出光标 -->
+        <text wx:if="{{isStreaming && role === 'assistant'}}" class="typing-cursor">|</text>
+      </view>
+
+      <!-- 消息脚注：时间 + 复制按钮 -->
+      <view class="msg-footer">
+        <view class="msg-time" wx:if="{{createdAt}}">{{createdAt}}</view>
+        <view class="msg-copy-btn" wx:if="{{content && !isStreaming}}" catchtap="onCopy">
+          <text>复制</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

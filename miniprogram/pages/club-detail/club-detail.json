@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "社团详情",
+  "usingComponents": {
+    "apply-form-modal": "/components/apply-form-modal/apply-form-modal",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

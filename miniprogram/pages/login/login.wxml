@@ -1,0 +1,118 @@
+<view class="login-page">
+  <!-- 背景：仅保留柔和渐变 -->
+  <view class="login-bg"></view>
+
+  <!-- 主体卡片 -->
+  <view class="login-card fade-in-up">
+    <view class="brand-section">
+      <view class="avatar-wrap">
+        <yuanbao-avatar size="lg" expression="happy" animated bindtap="onAvatarTap" />
+      </view>
+      <text class="brand-title">长春师范大学</text>
+      <text class="brand-subtitle">校园AI助手 · 园宝</text>
+    </view>
+
+    <!-- 登录表单（默认显示） -->
+    <view wx:if="{{!showChangePwdForm}}" class="login-form fade-in">
+      <view class="input-group">
+        <text class="input-label">学号 / 工号</text>
+        <input
+          class="login-input"
+          type="text"
+          placeholder="请输入学号或工号"
+          value="{{studentId}}"
+          bindinput="onStudentIdInput"
+        />
+      </view>
+
+      <view class="input-group">
+        <text class="input-label">密码</text>
+        <input
+          class="login-input"
+          type="password"
+          placeholder="默认密码 123456"
+          value="{{password}}"
+          bindinput="onPasswordInput"
+        />
+      </view>
+
+      <view wx:if="{{errorMsg}}" class="error-msg fade-in">{{errorMsg}}</view>
+
+      <button
+        class="btn-primary press-scale {{loading ? 'btn-loading' : ''}}"
+        disabled="{{loading}}"
+        bindtap="onAccountLogin"
+      >
+        <text class="btn-text">登 录</text>
+      </button>
+    </view>
+
+    <!-- 首次登录修改密码表单 -->
+    <view wx:else class="login-form fade-in">
+      <view class="brand-section" style="margin-bottom: 24rpx;">
+        <text class="brand-subtitle" style="color:var(--primary);font-weight:600;">首次登录，请修改密码</text>
+      </view>
+
+      <view class="input-group">
+        <text class="input-label">原密码</text>
+        <input
+          class="login-input"
+          type="password"
+          placeholder="请输入原密码"
+          value="{{changePwd.oldPassword}}"
+          bindinput="onOldPwdInput"
+        />
+      </view>
+
+      <view class="input-group">
+        <text class="input-label">新密码</text>
+        <input
+          class="login-input"
+          type="password"
+          placeholder="请输入新密码（至少6位）"
+          value="{{changePwd.newPassword}}"
+          bindinput="onNewPwdInput"
+        />
+      </view>
+
+      <view class="input-group">
+        <text class="input-label">确认新密码</text>
+        <input
+          class="login-input"
+          type="password"
+          placeholder="请再次输入新密码"
+          value="{{changePwd.confirmPassword}}"
+          bindinput="onConfirmPwdInput"
+        />
+      </view>
+
+      <view wx:if="{{errorMsg}}" class="error-msg fade-in">{{errorMsg}}</view>
+
+      <button
+        class="btn-primary press-scale {{loading ? 'btn-loading' : ''}}"
+        disabled="{{loading}}"
+        bindtap="onChangePassword"
+      >
+        <text class="btn-text">确认修改</text>
+      </button>
+    </view>
+
+    <!-- 隐私协议 -->
+    <view class="privacy-row">
+      <checkbox-group bindchange="onPrivacyChange">
+        <label class="privacy-label">
+          <checkbox class="privacy-checkbox" value="1" checked="{{agreePrivacy}}" color="#E07A3E" />
+          <text class="privacy-text">我已阅读并同意</text>
+        </label>
+      </checkbox-group>
+      <text class="privacy-link" bindtap="openAgreement">《用户协议》</text>
+      <text class="privacy-text">和</text>
+      <text class="privacy-link" bindtap="openPrivacy">《隐私政策》</text>
+    </view>
+  </view>
+
+  <!-- 底部安全提示 -->
+  <view class="login-footer">
+    <text class="footer-text">校园服务 · 安全可信</text>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+<scroll-view class="tab-category" scroll-x enable-flex enhanced show-scrollbar="{{false}}">
+  <view
+    wx:for="{{tabs}}"
+    wx:key="key"
+    class="tab-item {{activeKey === item.key ? 'tab-active' : ''}}"
+    data-key="{{item.key}}"
+    bindtap="onTap"
+  >
+    {{item.label}}
+    <view wx:if="{{activeKey === item.key}}" class="tab-underline"></view>
+  </view>
+</scroll-view>

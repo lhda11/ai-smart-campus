@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "AI 智能咨询",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "empty-state": "/components/empty-state/empty-state",
+    "yuanbao-avatar": "/components/yuanbao-avatar/yuanbao-avatar"
+  }
+}

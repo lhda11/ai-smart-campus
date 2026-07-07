@@ -1,0 +1,393 @@
+/* ===== 尺寸变量 ===== */
+.yuanbao-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yuanbao-sm { --size: 72rpx; --eye-w: 14rpx; --eye-h: 18rpx; }
+.yuanbao-md { --size: 120rpx; --eye-w: 24rpx; --eye-h: 30rpx; }
+.yuanbao-lg { --size: 180rpx; --eye-w: 36rpx; --eye-h: 46rpx; }
+
+/* ===== 身体 ===== */
+.yuanbao-body {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #F4A261 0%, var(--primary) 45%, var(--primary-dark) 100%);
+  box-shadow:
+    inset -8rpx -12rpx 24rpx rgba(0,0,0,0.12),
+    inset 10rpx 12rpx 24rpx rgba(255,255,255,0.25),
+    0 12rpx 28rpx rgba(224, 122, 62,0.35);
+  position: relative;
+  transform-origin: center bottom;
+}
+
+/* ===== 浮动动画 ===== */
+@keyframes yuanbaoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14rpx); }
+}
+
+.yuanbao-float .yuanbao-body {
+  animation: yuanbaoFloat 2.8s ease-in-out infinite;
+}
+
+/* ===== 点击弹跳 ===== */
+@keyframes yuanbaoBounce {
+  0% { transform: scale(1) translateY(0); }
+  30% { transform: scale(0.92, 1.08) translateY(8rpx); }
+  55% { transform: scale(1.08, 0.92) translateY(-28rpx); }
+  80% { transform: scale(0.97, 1.03) translateY(4rpx); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.yuanbao-bounce .yuanbao-body {
+  animation: yuanbaoBounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== 脸部容器 ===== */
+.yuanbao-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ===== 眼睛 ===== */
+.eye {
+  position: absolute;
+  top: 34%;
+  width: var(--eye-w);
+  height: var(--eye-h);
+  background: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: inset 0 2rpx 4rpx rgba(0,0,0,0.08);
+}
+
+.eye-left { left: 26%; }
+.eye-right { right: 26%; }
+
+.pupil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 42%;
+  height: 42%;
+  background: var(--text-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pupil::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  right: 18%;
+  width: 30%;
+  height: 30%;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* ===== 嘴巴 ===== */
+.mouth {
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  width: 18%;
+  height: 8%;
+  background: var(--text-primary);
+  border-radius: 0 0 50% 50%;
+  transform: translateX(-50%);
+  transition: all 0.25s ease;
+}
+
+/* ===== 腮红 ===== */
+.cheek {
+  position: absolute;
+  top: 50%;
+  width: 14%;
+  height: 8%;
+  background: rgba(255,150,180,0.35);
+  border-radius: 50%;
+  filter: blur(2rpx);
+}
+
+.cheek-left { left: 16%; }
+.cheek-right { right: 16%; }
+
+/* ===== 表情：开心 ===== */
+.face-happy .mouth {
+  width: 28%;
+  height: 16%;
+  border-radius: 0 0 50% 50%;
+  background: var(--text-primary);
+}
+
+.face-happy .eye {
+  height: calc(var(--eye-h) * 0.85);
+}
+
+/* ===== 表情：惊讶 ===== */
+.face-surprised .mouth {
+  width: 14%;
+  height: 14%;
+  border-radius: 50%;
+}
+
+.face-surprised .eye {
+  height: calc(var(--eye-h) * 1.15);
+}
+
+/* ===== 表情：思考 ===== */
+.face-thinking .mouth {
+  width: 12%;
+  height: 6%;
+  border-radius: 50%;
+}
+
+.face-thinking .eye-left {
+  transform: rotate(-8deg);
+}
+
+.face-thinking .eye-right {
+  transform: rotate(8deg);
+}
+
+/* ===== 表情：眨眼 ===== */
+.face-blink .eye {
+  height: 4rpx;
+  border-radius: 2rpx;
+  background: var(--text-primary);
+}
+
+.face-blink .pupil {
+  display: none;
+}
+
+/* ===== Robot variant ===== */
+.variant-robot .yuanbao-body {
+  height: calc(var(--size) * 0.9);
+  border-radius: 28% 28% 22% 22% / 24% 24% 18% 18%;
+  background: linear-gradient(145deg, #FCE8D5 0%, var(--primary) 55%, var(--primary-dark) 100%);
+  box-shadow:
+    inset -8rpx -10rpx 22rpx rgba(0,0,0,0.12),
+    inset 10rpx 10rpx 22rpx rgba(255,255,255,0.28),
+    0 14rpx 30rpx rgba(224, 122, 62,0.32);
+}
+
+.variant-robot .robot-antenna {
+  position: absolute;
+  top: -18%;
+  left: 50%;
+  width: 8rpx;
+  height: 22%;
+  background: linear-gradient(to bottom, var(--primary-dark), var(--primary));
+  border-radius: 4rpx;
+  transform: translateX(-50%);
+}
+
+.variant-robot .robot-antenna::after {
+  content: '';
+  position: absolute;
+  top: -10rpx;
+  left: 50%;
+  width: 22rpx;
+  height: 22rpx;
+  background: radial-gradient(circle at 35% 30%, #ff9a9a 0%, #ff6b6b 45%, #ee5253 100%);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10rpx rgba(255,107,107,0.45);
+}
+
+.variant-robot .yuanbao-face::before {
+  content: '';
+  position: absolute;
+  top: 14%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  background: rgba(255,255,255,0.22);
+  border-radius: 18%;
+  pointer-events: none;
+}
+
+.variant-robot .yuanbao-shadow {
+  width: 70%;
+  bottom: -14%;
+}
+
+/* ===== Calico cat variant ===== */
+.variant-cat .yuanbao-body {
+  height: calc(var(--size) * 0.88);
+  border-radius: 46% 46% 42% 42% / 40% 40% 55% 55%;
+  background: #fff8f0;
+  box-shadow:
+    inset -6rpx -8rpx 18rpx rgba(0,0,0,0.08),
+    inset 8rpx 8rpx 18rpx rgba(255,255,255,0.9),
+    0 12rpx 28rpx rgba(120,80,60,0.18);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.variant-cat .yuanbao-body::before {
+  content: '';
+  position: absolute;
+  top: 6%;
+  left: -10%;
+  width: 48%;
+  height: 58%;
+  background: #f4a261;
+  border-radius: 50% 60% 40% 60% / 50% 60% 40% 60%;
+  transform: rotate(-18deg);
+  opacity: 0.95;
+}
+
+.variant-cat .yuanbao-body::after {
+  content: '';
+  position: absolute;
+  top: 4%;
+  right: -10%;
+  width: 46%;
+  height: 52%;
+  background: #2d2d2d;
+  border-radius: 60% 50% 60% 40% / 60% 50% 60% 40%;
+  transform: rotate(14deg);
+  opacity: 0.92;
+}
+
+.variant-cat .cat-ear {
+  position: absolute;
+  top: -8%;
+  width: 28%;
+  height: 34%;
+  border-radius: 20% 80% 10% 90% / 20% 80% 10% 90%;
+  z-index: 0;
+}
+
+.variant-cat .cat-ear-left {
+  left: 8%;
+  background: #f4a261;
+  transform: rotate(-14deg);
+}
+
+.variant-cat .cat-ear-right {
+  right: 8%;
+  background: #2d2d2d;
+  transform: rotate(14deg) scaleX(-1);
+}
+
+.variant-cat .cat-ear::after {
+  content: '';
+  position: absolute;
+  top: 28%;
+  left: 22%;
+  width: 52%;
+  height: 52%;
+  background: rgba(255,180,180,0.55);
+  border-radius: 20% 80% 10% 90% / 20% 80% 10% 90%;
+}
+
+.variant-cat .cat-nose {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9%;
+  height: 6%;
+  background: #ff9aa2;
+  border-radius: 45% 45% 55% 55%;
+  transform: translateX(-50%);
+}
+
+.variant-cat .cat-whiskers {
+  position: absolute;
+  top: 56%;
+  width: 22%;
+  height: 2rpx;
+  background: rgba(80,60,50,0.32);
+  border-radius: 2rpx;
+}
+
+.variant-cat .cat-whiskers-left {
+  left: 4%;
+  transform-origin: right center;
+  transform: rotate(4deg);
+}
+
+.variant-cat .cat-whiskers-left::before,
+.variant-cat .cat-whiskers-left::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(80,60,50,0.32);
+  border-radius: 2rpx;
+  transform-origin: right center;
+}
+
+.variant-cat .cat-whiskers-left::before { top: -10rpx; transform: rotate(-14deg); }
+.variant-cat .cat-whiskers-left::after { top: 10rpx; transform: rotate(14deg); }
+
+.variant-cat .cat-whiskers-right {
+  right: 4%;
+  transform-origin: left center;
+  transform: rotate(-4deg);
+}
+
+.variant-cat .cat-whiskers-right::before,
+.variant-cat .cat-whiskers-right::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(80,60,50,0.32);
+  border-radius: 2rpx;
+  transform-origin: left center;
+}
+
+.variant-cat .cat-whiskers-right::before { top: -10rpx; transform: rotate(14deg); }
+.variant-cat .cat-whiskers-right::after { top: 10rpx; transform: rotate(-14deg); }
+
+.variant-cat .pupil {
+  background: #E9A319;
+}
+
+.variant-cat .mouth {
+  background: #6B4423;
+}
+
+.variant-cat .yuanbao-shadow {
+  background: rgba(80,50,40,0.1);
+  width: 66%;
+  bottom: -12%;
+}
+
+/* ===== 底部阴影 ===== */
+.yuanbao-shadow {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  width: 60%;
+  height: 12%;
+  background: rgba(0,0,0,0.12);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  filter: blur(6rpx);
+  z-index: -1;
+}
+
+.yuanbao-float .yuanbao-shadow {
+  animation: shadowScale 2.8s ease-in-out infinite;
+}
+
+@keyframes shadowScale {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.12; }
+  50% { transform: translateX(-50%) scale(0.78); opacity: 0.06; }
+}
+

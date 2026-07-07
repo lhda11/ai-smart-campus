@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "长春师范大学",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "yuanbao-avatar": "/components/yuanbao-avatar/yuanbao-avatar"
+  }
+}

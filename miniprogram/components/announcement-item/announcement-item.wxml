@@ -1,0 +1,60 @@
+<wxs module="fmt">
+  var CATEGORY_MAP = {
+    notice: { label: '通知', color: 'badge-notice' },
+    activity: { label: '活动', color: 'badge-activity' },
+    policy: { label: '制度', color: 'badge-policy' }
+  };
+
+  function categoryLabel(cat) {
+    return (CATEGORY_MAP[cat] || { label: cat }).label;
+  }
+  function categoryColor(cat) {
+    return (CATEGORY_MAP[cat] || { color: 'badge-notice' }).color;
+  }
+  function formatTime(isoStr) {
+    if (!isoStr) return '';
+    var d = getDate(isoStr.replace('T', ' ').substring(0, 19));
+    var now = getDate();
+    var pad = function(n) { return n < 10 ? '0' + n : '' + n; };
+    var time = pad(d.getHours()) + ':' + pad(d.getMinutes());
+    var isToday = d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate();
+    if (isToday) return time;
+    var yesterday = getDate(now.getTime() - 86400000);
+    var isYesterday = d.getFullYear() === yesterday.getFullYear() && d.getMonth() === yesterday.getMonth() && d.getDate() === yesterday.getDate();
+    if (isYesterday) return '昨天 ' + time;
+    var ds = pad(d.getMonth()+1) + '-' + pad(d.getDate());
+    if (d.getFullYear() === now.getFullYear()) return ds + ' ' + time;
+    return d.getFullYear() + '-' + ds + ' ' + time;
+  }
+  module.exports = {
+    categoryLabel: categoryLabel,
+    categoryColor: categoryColor,
+    formatTime: formatTime
+  };
+</wxs>
+
+<!-- 骨架屏模式 -->
+<view wx:if="{{loading}}" class="announcement-item skeleton-card">
+  <view class="ann-item-header flex-between">
+    <view class="skeleton-line skeleton-line-md" style="height:32rpx;"></view>
+    <view class="skeleton-line" style="width:80rpx;height:28rpx;margin-bottom:0;"></view>
+  </view>
+  <view class="skeleton-line skeleton-line-lg" style="height:26rpx;"></view>
+  <view class="skeleton-line skeleton-line-sm" style="height:22rpx;margin-bottom:0;"></view>
+</view>
+
+<!-- 正常模式 -->
+<view wx:else class="announcement-item press-scale" bindtap="onTap">
+  <view class="ann-item-left">
+    <view class="color-bar color-bar-{{item.category || 'notice'}}"></view>
+  </view>
+  <view class="ann-item-right">
+    <view class="ann-item-header flex-between">
+      <text class="ann-item-title text-ellipsis">{{item.title}}</text>
+      <text wx:if="{{showCategory}}" class="ann-item-badge {{fmt.categoryColor(item.category)}}">{{fmt.categoryLabel(item.category)}}</text>
+    </view>
+    <view class="ann-item-summary text-ellipsis-2" wx:if="{{item.summary}}">{{item.summary}}</view>
+    <view class="ann-item-content text-ellipsis-2" wx:elif="{{item.content}}">{{item.content}}</view>
+    <text class="ann-item-time">{{fmt.formatTime(item.createdAt)}}</text>
+  </view>
+</view>

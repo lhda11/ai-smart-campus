@@ -1,0 +1,11 @@
+package com.campus.core;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication(scanBasePackages = "com.campus")
+public class CampusApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(CampusApplication.class, args);
+    }
+}

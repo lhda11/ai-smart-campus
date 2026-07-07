@@ -1,0 +1,159 @@
+.discover-header {
+  margin-top: 16rpx;
+}
+
+/* 分段控制器样式继承 app.wxss */
+
+/* 标签区 */
+.tag-area {
+  margin-top: 4rpx;
+}
+
+.tag-empty-row {
+  display: flex;
+  align-items: center;
+}
+
+.tag-placeholder {
+  flex: 1;
+  font-size: 26rpx;
+  color: var(--text-hint);
+  margin-left: 16rpx;
+}
+
+.tag-edit-link {
+  font-size: 26rpx;
+  color: var(--primary);
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.selected-tag {
+  font-size: 24rpx;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 8rpx 20rpx;
+  border-radius: var(--radius-full);
+  margin-right: 12rpx;
+  margin-bottom: 6rpx;
+}
+
+.tag-edit {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.ai-notice {
+  padding: 16rpx 32rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.club-list {
+  padding-top: 8rpx;
+}
+
+.loading-center {
+  padding: 120rpx 0;
+}
+
+/* 标签选择器弹窗 */
+.tag-picker-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.tag-picker {
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+  animation: slideUp 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.picker-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.picker-title {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.picker-count {
+  font-size: 24rpx;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 4rpx 16rpx;
+  border-radius: var(--radius-full);
+  margin-right: 20rpx;
+}
+
+.picker-close {
+  font-size: 36rpx;
+  color: var(--text-secondary);
+  padding: 8rpx;
+}
+
+.picker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.picker-tag {
+  font-size: 28rpx;
+  color: var(--text-body);
+  background: var(--bg-page);
+  padding: 20rpx 16rpx;
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.tag-selected {
+  color: #fff;
+  background: var(--gradient-accent);
+}
+
+.tag-check {
+  font-size: 22rpx;
+}
+
+.picker-confirm {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-md);
+  border: none;
+  box-shadow: var(--shadow-elevated);
+}
+
+.picker-confirm::after {
+  display: none;
+}

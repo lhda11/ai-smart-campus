@@ -1,0 +1,14 @@
+.board-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx 24rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.ann-list {
+  background: var(--bg-card);
+}
+
+/* FAB 位置由 wxml inline style 控制，其余样式继承 app.wxss */

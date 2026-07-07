@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "yuanbao-avatar": "/components/yuanbao-avatar/yuanbao-avatar"
+  }
+}

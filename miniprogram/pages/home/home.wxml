@@ -1,0 +1,101 @@
+<view class="page-container">
+  <!-- 头部欢迎 - 渐变背景+装饰光斑 -->
+  <view class="home-header">
+    <view class="header-bg-deco">
+      <view class="deco-circle deco-1"></view>
+    </view>
+    <view class="header-content">
+      <view class="header-greeting">
+        <text class="greeting-text">{{greeting}}，同学！</text>
+        <text class="greeting-sub">今天有什么可以帮你的？</text>
+      </view>
+      <view class="header-avatar-area">
+        <yuanbao-avatar size="md" expression="normal" animated bindtap="onAvatarTap" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷功能卡片 - 2x2 grid -->
+  <view class="feature-grid">
+    <view class="feature-card press-scale stagger-item stagger-1" bindtap="goChat">
+      <view class="feature-icon-box icon-box-primary">
+        <text class="feature-symbol">💬</text>
+      </view>
+      <text class="feature-title">智能问答</text>
+      <text class="feature-desc">有问题问园宝</text>
+    </view>
+    <view class="feature-card press-scale stagger-item stagger-2" bindtap="goDiscover">
+      <view class="feature-icon-box icon-box-accent">
+        <text class="feature-symbol">♣</text>
+      </view>
+      <text class="feature-title">社团推荐</text>
+      <text class="feature-desc">发现适合的社团</text>
+    </view>
+    <view class="feature-card press-scale stagger-item stagger-3" bindtap="goBoard">
+      <view class="feature-icon-box icon-box-orange">
+        <text class="feature-symbol">☰</text>
+      </view>
+      <text class="feature-title">公告</text>
+      <text class="feature-desc">查看最新通知</text>
+    </view>
+    <view class="feature-card press-scale stagger-item stagger-4" bindtap="goSearch">
+      <view class="feature-icon-box icon-box-green">
+        <text class="feature-symbol">⌖</text>
+      </view>
+      <text class="feature-title">快速搜索</text>
+      <text class="feature-desc">搜索资料文档</text>
+    </view>
+  </view>
+
+  <!-- 快捷问题 -->
+  <view class="section-title section-title-bar">
+    快捷提问
+  </view>
+  <view class="quick-section">
+    <view
+      wx:for="{{quickQuestions}}"
+      wx:key="index"
+      class="quick-chip press-scale"
+      data-question="{{item}}"
+      bindtap="tapQuickQuestion"
+    >
+      {{item}}
+    </view>
+  </view>
+
+  <!-- 最新公告 -->
+  <view class="section-title section-title-bar">
+    最新公告
+  </view>
+  <view wx:if="{{lastAnnouncement}}" class="ann-teaser card press-scale" bindtap="goAnnouncement">
+    <view class="ann-teaser-row">
+      <view class="color-bar color-bar-{{lastAnnouncement.category || 'notice'}}"></view>
+      <view class="ann-teaser-body">
+        <view class="flex-between">
+          <text class="ann-teaser-title text-ellipsis">{{lastAnnouncement.title}}</text>
+          <text class="ann-teaser-arrow">›</text>
+        </view>
+        <text class="ann-teaser-summary text-ellipsis-2">{{lastAnnouncement.summary || lastAnnouncement.content}}</text>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="ann-teaser card ann-teaser-empty" bindtap="goBoard">
+    <view class="empty-teaser-row">
+      <view class="icon-box-sm icon-box-orange" style="margin-right:20rpx;">
+        <text style="color:var(--warning);">◈</text>
+      </view>
+      <text class="teaser-empty-text">暂未同步最新公告，下拉刷新或点击查看公告 →</text>
+    </view>
+  </view>
+
+  <!-- 骨架屏（首次加载） -->
+  <view wx:if="{{showSkeleton}}" class="skeleton-area">
+    <view class="skeleton-card" style="margin-top:24rpx;">
+      <view class="skeleton-line" style="width:60%;height:32rpx;"></view>
+      <view class="skeleton-line skeleton-line-lg"></view>
+      <view class="skeleton-line skeleton-line-md"></view>
+    </view>
+  </view>
+
+  <view style="height: 40rpx;"></view>
+</view>

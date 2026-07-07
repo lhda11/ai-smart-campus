@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "园区墙",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "tab-category": "/components/tab-category/tab-category",
+    "announcement-item": "/components/announcement-item/announcement-item",
+    "empty-state": "/components/empty-state/empty-state",
+    "loading-more": "/components/loading-more/loading-more"
+  }
+}

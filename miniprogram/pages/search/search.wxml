@@ -1,0 +1,69 @@
+<view class="page-container" style="padding-top: {{statusBarHeight + 6}}px;">
+  <!-- 搜索栏 -->
+  <search-bar
+    value="{{keyword}}"
+    placeholder="搜索公告、文档..."
+    bindsearch="doSearch"
+    bindinput="onInput"
+    bindclear="onClear"
+    bindcancel="onCancel"
+  />
+
+  <!-- 搜索结果 -->
+  <view wx:if="{{searched}}">
+    <view wx:if="{{searching}}" class="loading-center">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">搜索中...</text>
+    </view>
+
+    <view wx:elif="{{results.length > 0}}">
+      <view class="result-count">找到 {{results.length}} 条相关结果</view>
+      <view class="result-list">
+        <announcement-item
+          wx:for="{{results}}"
+          wx:key="id"
+          item="{{item}}"
+          bindtap="onItemTap"
+        />
+      </view>
+    </view>
+
+    <view wx:else>
+      <empty-state icon="◎" text="没有找到相关内容" subtitle="试试其他关键词" />
+    </view>
+  </view>
+
+  <!-- 未搜索时 -->
+  <view wx:else>
+    <!-- 热门搜索 -->
+    <view class="hot-section">
+      <text class="hot-title">热门搜索</text>
+      <view class="hot-tags">
+        <view
+          wx:for="{{hotSearches}}"
+          wx:key="index"
+          class="hot-tag"
+          data-keyword="{{item}}"
+          bindtap="tapHotSearch"
+        >{{item}}</view>
+      </view>
+    </view>
+
+    <!-- 搜索历史 -->
+    <view wx:if="{{searchHistory.length > 0}}" class="history-section">
+      <view class="history-header flex-between">
+        <text class="history-title">搜索历史</text>
+        <text class="history-clear" bindtap="clearHistory">清除</text>
+      </view>
+      <view class="history-tags">
+        <view
+          wx:for="{{searchHistory}}"
+          wx:key="index"
+          class="history-tag"
+          data-keyword="{{item}}"
+          bindtap="tapHistory"
+        >{{item}}</view>
+      </view>
+    </view>
+  </view>
+</view>

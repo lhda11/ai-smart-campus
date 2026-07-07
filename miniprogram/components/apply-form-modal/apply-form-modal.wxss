@@ -1,0 +1,129 @@
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 32rpx;
+  padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+  animation: slideUp 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.modal-title {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.modal-close {
+  font-size: 36rpx;
+  color: var(--text-secondary);
+  padding: 8rpx;
+}
+
+.form-group {
+  margin-bottom: 28rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: var(--text-body);
+  font-weight: 500;
+  margin-bottom: 12rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 88rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  border: 1rpx solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-page);
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4rpx rgba(224, 122, 62, 0.1);
+  background: var(--bg-card);
+}
+
+.input-error {
+  border-color: var(--danger);
+  background: #FFF5F5;
+}
+
+.input-error:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 4rpx rgba(255, 59, 48, 0.1);
+}
+
+.error-text {
+  font-size: 24rpx;
+  color: var(--danger);
+  margin-top: 8rpx;
+  display: flex;
+  align-items: center;
+}
+
+.error-text::before {
+  content: '注意：';
+  margin-right: 4rpx;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 32rpx;
+}
+
+.btn-cancel,
+.btn-submit {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 30rpx;
+  border-radius: var(--radius-md);
+  border: none;
+}
+
+.btn-cancel {
+  background: var(--bg-page);
+  color: var(--text-secondary);
+}
+
+.btn-submit {
+  background: var(--gradient-accent);
+  color: #fff;
+  box-shadow: var(--shadow-elevated);
+}
+
+.btn-disabled {
+  opacity: 0.6;
+  box-shadow: none;
+}

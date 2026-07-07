@@ -1,0 +1,45 @@
+<wxs module="fmt" src="./detail.wxs"></wxs>
+
+<view class="page-container">
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-center">
+    <view class="loading-spinner"></view>
+  </view>
+
+  <!-- 错误 -->
+  <view wx:elif="{{error}}" class="error-center">
+    <view class="error-icon-box">
+      <text>!</text>
+    </view>
+    <text class="error-msg">{{error}}</text>
+  </view>
+
+  <!-- 公告详情 -->
+  <view wx:elif="{{announcement}}" class="detail-card card">
+    <view class="detail-header">
+      <view class="detail-category-row">
+        <text class="detail-badge {{fmt.categoryColor(announcement.category)}}">{{fmt.categoryLabel(announcement.category)}}</text>
+        <text class="detail-time">{{fmt.formatTime(announcement.createdAt)}}</text>
+      </view>
+      <text class="detail-title">{{announcement.title}}</text>
+    </view>
+
+    <view class="detail-content">
+      <text>{{announcement.content}}</text>
+    </view>
+
+    <!-- 附件下载 -->
+    <view wx:if="{{announcement.fileUrl}}" class="detail-file" bindtap="downloadFile">
+      <view class="file-type-badge">
+        <text>{{fileTypeLabel}}</text>
+      </view>
+      <text class="file-text">查看附件</text>
+      <text class="file-arrow">›</text>
+    </view>
+
+    <!-- 操作 -->
+    <view class="detail-actions">
+      <button class="btn-delete" bindtap="deleteAnnouncement">删除公告</button>
+    </view>
+  </view>
+</view>

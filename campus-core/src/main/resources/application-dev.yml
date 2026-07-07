@@ -1,0 +1,11 @@
+logging:
+  level:
+    com.campus: debug
+    org.springframework.ai: debug
+
+spring:
+  ai:
+    openai:
+      chat:
+        options:
+          model: deepseek-v4-flash

@@ -1,0 +1,33 @@
+.tab-category {
+  display: flex;
+  white-space: nowrap;
+  background: #fff;
+  border-bottom: 1rpx solid var(--border);
+  padding: 0 24rpx;
+  position: relative;
+}
+
+.tab-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22rpx 28rpx;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  position: relative;
+  transition: color 0.2s;
+}
+
+.tab-active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.tab-underline {
+  width: 40rpx;
+  height: 4rpx;
+  background: var(--gradient-accent);
+  border-radius: 2rpx;
+  margin-top: 6rpx;
+  animation: fadeIn 0.25s ease-out;
+}

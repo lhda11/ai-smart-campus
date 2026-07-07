@@ -1,0 +1,45 @@
+<view class="page-container">
+  <!-- 统计条 -->
+  <view wx:if="{{statsText}}" class="board-stats">
+    <text>{{statsText}}</text>
+  </view>
+
+  <!-- 分类 Tab -->
+  <tab-category tabs="{{tabs}}" activeKey="{{activeCategory}}" bindchange="onCategoryChange" />
+
+  <!-- 骨架屏 -->
+  <view wx:if="{{loading && announcements.length === 0}}">
+    <announcement-item wx:for="{{[1,2,3,4,5]}}" wx:key="index" loading="{{true}}" />
+  </view>
+
+  <!-- 公告列表 -->
+  <view wx:elif="{{!isEmpty}}" class="ann-list">
+    <announcement-item
+      wx:for="{{announcements}}"
+      wx:key="id"
+      item="{{item}}"
+      bindtap="onAnnouncementTap"
+    />
+  </view>
+
+  <!-- 空状态 -->
+  <empty-state
+    wx:if="{{isEmpty && !loading}}"
+    icon="◈"
+    text="暂无公告"
+    subtitle="该分类下还没有内容"
+    buttonText="发布第一条公告"
+    bindaction="goUpload"
+  />
+
+  <!-- 加载更多 -->
+  <loading-more
+    status="{{loadStatus}}"
+    bindretry="onLoadMoreRetry"
+  />
+
+  <!-- 发布公告 FAB -->
+  <view class="fab" bindtap="goUpload" style="bottom: 60rpx;">
+    <text>＋</text>
+  </view>
+</view>

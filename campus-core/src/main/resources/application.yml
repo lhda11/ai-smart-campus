@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: ai-smart-campus
+  profiles:
+    active: dev
+  ai:
+    openai:
+      api-key: ${AI_API_KEY:sk-demo-key}
+      base-url: ${AI_BASE_URL:https://api.deepseek.com}
+      chat:
+        enabled: true
+        options:
+          model: deepseek-v4-flash
+          temperature: 0.7
+      embedding:
+        enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ai_smart_campus?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:123456}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6380}
+      # password: ${REDIS_PASSWORD:}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASS:guest}
+
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9001}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  bucket: campus
+
+siliconflow:
+  api-key: ${SILICONFLOW_API_KEY:}
+  base-url: ${SILICONFLOW_BASE_URL:https://api.siliconflow.cn}
+  embedding-model: ${SILICONFLOW_EMBEDDING_MODEL:Qwen/Qwen3-Embedding-8B}
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: status
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+
+knife4j:
+  enable: true
+
+server:
+  port: 8088

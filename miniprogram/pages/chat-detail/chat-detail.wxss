@@ -1,0 +1,181 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-page);
+}
+
+/* 顶部操作栏 */
+.detail-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14rpx 24rpx;
+  background: var(--bg-card);
+  border-bottom: 1rpx solid var(--border);
+  flex-shrink: 0;
+}
+
+.detail-top-left {
+  flex: 1;
+}
+
+.detail-top-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.detail-top-actions {
+  display: flex;
+  gap: 16rpx;
+  flex-shrink: 0;
+}
+
+.detail-action-btn {
+  padding: 6rpx 22rpx;
+  border-radius: var(--radius-full);
+  font-size: 24rpx;
+  color: var(--primary);
+  background: var(--primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-action-btn:active {
+  opacity: 0.7;
+}
+
+.detail-action-danger {
+  color: var(--danger);
+  background: rgba(255, 77, 79, 0.1);
+}
+
+/* 消息滚动区 */
+.msg-scroll {
+  flex: 1;
+  padding-top: 16rpx;
+  overflow-y: auto;
+}
+
+/* 欢迎区域 */
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 110rpx 40rpx 40rpx;
+}
+
+.welcome-avatar-wrap {
+  position: relative;
+  margin-bottom: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-title {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 14rpx;
+}
+.welcome-desc {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 540rpx;
+}
+
+.quick-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 16rpx;
+  justify-content: center;
+}
+
+.quick-item {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-sm);
+  color: var(--primary);
+  background: var(--bg-card);
+  padding: 18rpx 30rpx;
+  border-radius: var(--radius-full);
+  margin: 8rpx;
+  border: 1rpx solid var(--primary-light);
+  box-shadow: var(--shadow-card);
+}
+
+.quick-text {}
+
+/* 滚动到底部 */
+.scroll-to-bottom {
+  position: fixed;
+  right: 32rpx;
+  bottom: 200rpx;
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: var(--primary);
+  z-index: 50;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* 底部输入区 */
+.input-area {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: var(--bg-card);
+  border-top: 1rpx solid var(--border);
+  gap: 16rpx;
+}
+
+.chat-input {
+  flex: 1;
+  height: 76rpx;
+  padding: 0 28rpx;
+  font-size: 28rpx;
+  background: var(--bg-page);
+  border-radius: var(--radius-full);
+  border: none;
+}
+
+.send-btn {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--text-hint);
+  background: var(--bg-page);
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.send-active {
+  color: #fff;
+  background: var(--gradient-accent);
+  box-shadow: var(--shadow-elevated);
+}
+
+.send-icon {
+  font-size: 24rpx;
+}
+
+.send-icon-disabled {
+  font-size: 24rpx;
+  color: var(--text-hint);
+}

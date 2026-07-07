@@ -1,0 +1,71 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/chat/chat",
+    "pages/discover/discover",
+    "pages/board/board",
+    "pages/mine/mine",
+    "pages/chat-detail/chat-detail",
+    "pages/club-detail/club-detail",
+    "pages/announcement-detail/announcement-detail",
+    "pages/announce-upload/announce-upload",
+    "pages/search/search",
+    "pages/my-applications/my-applications",
+    "pages/admin/admin"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "长春师范大学",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F7F7FA"
+  },
+  "tabBar": {
+    "color": "#9A9AA0",
+    "selectedColor": "#E07A3E",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/chat/chat",
+        "text": "对话",
+        "iconPath": "images/tab-chat.png",
+        "selectedIconPath": "images/tab-chat-active.png"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "images/tab-discover.png",
+        "selectedIconPath": "images/tab-discover-active.png"
+      },
+      {
+        "pagePath": "pages/board/board",
+        "text": "园区墙",
+        "iconPath": "images/tab-board.png",
+        "selectedIconPath": "images/tab-board-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/tab-mine.png",
+        "selectedIconPath": "images/tab-mine-active.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 60000,
+    "connectSocket": 60000,
+    "uploadFile": 120000,
+    "downloadFile": 120000
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

@@ -1,0 +1,72 @@
+<wxs module="fmt">
+  function statusLabel(s) {
+    if (s === 0) return '已提交';
+    if (s === 1) return '已通过';
+    if (s === 2) return '未通过';
+    return '未知';
+  }
+  function statusColor(s) {
+    if (s === 0) return '#E07A3E';
+    if (s === 1) return '#34C759';
+    if (s === 2) return '#777777';
+    return '#777777';
+  }
+  function statusBg(s) {
+    if (s === 0) return '#FCE8D5';
+    if (s === 1) return '#E8F5E9';
+    if (s === 2) return '#F5F5F5';
+    return '#F5F5F5';
+  }
+  function fmtTime(iso) {
+    if (!iso) return '';
+    var d = getDate(iso.replace('T',' ').substring(0,19));
+    var pad = function(n){return n<10?'0'+n:''+n;};
+    return pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());
+  }
+  function maskPhone(p) {
+    if (!p || p.length !== 11) return p || '';
+    return p.substring(0,3) + '****' + p.substring(7);
+  }
+  module.exports = {
+    statusLabel: statusLabel, statusColor: statusColor, statusBg: statusBg,
+    fmtTime: fmtTime, maskPhone: maskPhone
+  };
+</wxs>
+
+<view class="page-container">
+  <view wx:if="{{!isEmpty}}">
+    <view wx:for="{{applications}}" wx:key="id" class="app-card card fade-in-up">
+      <view class="app-header flex-between">
+        <view class="app-club-info">
+          <text class="app-club-name">{{item.clubName || '社团'}}</text>
+          <text class="app-name">{{item.name}}</text>
+        </view>
+        <text class="app-status" style="background:{{fmt.statusBg(item.status)}};color:{{fmt.statusColor(item.status)}};">{{fmt.statusLabel(item.status)}}</text>
+      </view>
+      <view class="app-info">
+        <view class="app-field">
+          <text class="field-label">学号</text>
+          <text class="field-value">{{item.studentId}}</text>
+        </view>
+        <view class="app-field">
+          <text class="field-label">手机</text>
+          <text class="field-value">{{fmt.maskPhone(item.phone)}}</text>
+        </view>
+        <view class="app-field">
+          <text class="field-label">时间</text>
+          <text class="field-value">{{fmt.fmtTime(item.createdAt)}}</text>
+        </view>
+      </view>
+      <view wx:if="{{item.remark}}" class="app-remark">{{item.remark}}</view>
+    </view>
+  </view>
+
+  <empty-state
+    wx:if="{{isEmpty && !loading}}"
+    icon="◈"
+    text="还没有报名记录"
+    subtitle="前往发现页寻找感兴趣的社团"
+    buttonText="去发现社团"
+    bindaction="goDiscover"
+  />
+</view>

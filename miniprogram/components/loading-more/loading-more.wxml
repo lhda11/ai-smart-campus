@@ -1,0 +1,10 @@
+<view class="loading-more" wx:if="{{status !== 'hidden'}}">
+  <block wx:if="{{status === 'loading'}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">{{loadingText}}</text>
+  </block>
+  <text wx:elif="{{status === 'noMore'}}" class="no-more">{{noMoreText}}</text>
+  <view wx:elif="{{status === 'error'}}" class="error-retry" bindtap="onRetry">
+    <text class="error-text">{{errorText}}</text>
+  </view>
+</view>

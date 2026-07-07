@@ -1,0 +1,46 @@
+<view class="page-container">
+  <!-- 向量索引管理 -->
+  <view class="admin-section card">
+    <view class="admin-header">
+      <view class="icon-box-lg icon-box-accent">
+        <text>◎</text>
+      </view>
+      <view class="admin-header-text">
+        <text class="admin-title">向量索引管理</text>
+        <text class="admin-desc">当文档内容变更后，可重建向量索引以确保搜索结果准确性。</text>
+      </view>
+    </view>
+
+    <button
+      class="btn-rebuild {{rebuilding ? 'btn-loading' : ''}}"
+      disabled="{{rebuilding}}"
+      bindtap="rebuildIndex"
+    >
+      {{rebuilding ? '重建中...' : '重建向量索引'}}
+    </button>
+
+    <view wx:if="{{rebuildResult}}" class="rebuild-result {{rebuildResult.indexOf('失败') >= 0 ? 'result-error' : 'result-success'}}">
+      <text>{{rebuildResult}}</text>
+    </view>
+
+    <view class="admin-notice">
+      注意：此操作需要后端 Embedding API 可用，请确保硅基流动 API Key 已配置。
+    </view>
+  </view>
+
+  <!-- 数据统计占位 -->
+  <view class="admin-section card">
+    <view class="admin-header">
+      <view class="icon-box-lg icon-box-green">
+        <text>◉</text>
+      </view>
+      <view class="admin-header-text">
+        <text class="admin-title">数据统计</text>
+        <text class="admin-desc">园区数据总览和运营指标。</text>
+      </view>
+    </view>
+    <view class="stats-placeholder">
+      <text class="stats-hint">统计面板即将上线</text>
+    </view>
+  </view>
+</view>

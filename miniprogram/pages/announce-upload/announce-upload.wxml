@@ -1,0 +1,74 @@
+<view class="page-container">
+  <view class="upload-form card">
+    <!-- 标题 -->
+    <view class="form-group">
+      <text class="form-label">标题 <text class="label-required">*</text></text>
+      <input
+        class="form-input"
+        placeholder="请输入公告标题（最多50字）"
+        value="{{title}}"
+        bindinput="onTitleInput"
+        maxlength="50"
+      />
+    </view>
+
+    <!-- 分类 → 卡片选择 -->
+    <view class="form-group">
+      <text class="form-label">分类</text>
+      <view class="category-cards">
+        <view
+          wx:for="{{categories}}"
+          wx:key="value"
+          class="category-card {{category === item.value ? 'cat-active' : ''}}"
+          data-cat="{{item.value}}"
+          data-idx="{{index}}"
+          bindtap="selectCategory"
+        >
+          <text class="cat-icon">{{item.icon}}</text>
+          <text class="cat-label">{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 文件选择 -->
+    <view class="form-group">
+      <text class="form-label">文件 <text class="label-required">*</text></text>
+      <view wx:if="{{!fileName}}" class="file-placeholder" bindtap="chooseFile">
+        <view class="file-upload-icon-box">
+          <text>↥</text>
+        </view>
+        <text class="file-placeholder-text">点击选择文件（支持 TXT / PDF / DOCX）</text>
+      </view>
+      <view wx:else class="file-selected" bindtap="chooseFile">
+        <view class="file-type-badge">
+          <text>{{fileExt}}</text>
+        </view>
+        <view class="file-info">
+          <text class="file-name">{{fileName}}</text>
+          <text class="file-size">{{fileSize}}</text>
+        </view>
+        <text class="file-change">更换</text>
+      </view>
+    </view>
+
+    <!-- 上传进度 -->
+    <view wx:if="{{uploading}}" class="progress-wrap">
+      <view class="progress-header flex-between">
+        <text class="progress-label">上传中</text>
+        <text class="progress-percent">{{uploadProgress}}%</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{uploadProgress}}%"></view>
+      </view>
+    </view>
+
+    <!-- 提交 -->
+    <button
+      class="btn-submit {{uploading ? 'btn-disabled' : ''}}"
+      disabled="{{uploading}}"
+      bindtap="submit"
+    >
+      {{uploading ? '上传中...' : '发布公告'}}
+    </button>
+  </view>
+</view>

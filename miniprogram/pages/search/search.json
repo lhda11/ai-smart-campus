@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "搜索",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "search-bar": "/components/search-bar/search-bar",
+    "announcement-item": "/components/announcement-item/announcement-item",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

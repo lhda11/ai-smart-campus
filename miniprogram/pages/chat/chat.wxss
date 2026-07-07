@@ -1,0 +1,129 @@
+.chat-top-bar {
+  display: none; /* 由FAB替代 */
+}
+
+/* 顶部操作栏 */
+.chat-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx var(--spacing-md) 8rpx;
+}
+
+.chat-header-left {
+  flex: 1;
+}
+
+.chat-header-count {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.chat-header-right {
+  flex-shrink: 0;
+}
+
+.clear-all-btn {
+  padding: 8rpx 24rpx;
+  border-radius: var(--radius-full);
+  background: var(--danger);
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-all-btn:active {
+  opacity: 0.8;
+}
+
+/* 对话项 */
+.conv-item-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 12rpx var(--spacing-md);
+  border-radius: var(--radius-md);
+}
+
+.conv-item {
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  padding: 28rpx 32rpx;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.25s ease;
+}
+
+.conv-item:active {
+  background: var(--bg-card-soft);
+}
+
+.conv-swiped {
+  transform: translateX(-140rpx);
+}
+
+/* 头像 */
+.conv-avatar {
+  flex-shrink: 0;
+  margin-right: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conv-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.conv-header {
+  margin-bottom: 10rpx;
+}
+
+.conv-title {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.conv-time {
+  font-size: 22rpx;
+  color: var(--text-hint);
+  margin-left: 16rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.conv-preview {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.conv-arrow {
+  font-size: 32rpx;
+  color: var(--text-hint);
+  margin-left: 12rpx;
+  flex-shrink: 0;
+}
+
+/* 滑动删除按钮 */
+.conv-delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 140rpx;
+  background: var(--danger);
+  color: #fff;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+}
+
+/* 删除自定义 FAB，统一使用 app.wxss */

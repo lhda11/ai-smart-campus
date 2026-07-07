@@ -1,0 +1,9 @@
+<view class="empty-state fade-in">
+  <view class="empty-icon-box pulse">
+    <yuanbao-avatar wx:if="{{useAvatar}}" size="lg" expression="thinking" animated />
+    <text wx:else class="empty-symbol">{{icon}}</text>
+  </view>
+  <view class="empty-text">{{text}}</view>
+  <view wx:if="{{subtitle}}" class="empty-subtitle">{{subtitle}}</view>
+  <button wx:if="{{buttonText}}" class="empty-btn press-scale" bindtap="onAction">{{buttonText}}</button>
+</view>
